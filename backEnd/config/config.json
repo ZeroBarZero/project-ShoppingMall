@@ -1,10 +1,16 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "admin",
+    "password": "schbugkiller",
+    "database": "helloSeoul",
+    "host": "project-db-mysql.c1drtss9bg0n.ap-northeast-2.rds.amazonaws.com",
+    "port": "10270",
+    "dialect": "mysql",
+    "pool": {
+      "max": 20,
+      "min": 0,
+      "idle": 10000
+    }
   },
   "test": {
     "username": "root",
