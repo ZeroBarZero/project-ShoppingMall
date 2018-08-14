@@ -10,7 +10,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.render('login');
 });
 
 /*
@@ -35,13 +35,14 @@ POST /login
 }
 */
 router.post('/login', (req,res) => {
-  const {email, password} = req.body;
+  const {email, password} = req.body; // req.body
   _user.findOne({where:{email:email}}).then((user) => {
     if(!user || !bCrypt.compareSync(password, user.password)){
       return res.status(401).end;
     }
     const token = jwt.sign({id:user.id, email:user.email, isVerificated:user.isVerificated}, SECRET, {expiresIn:'1d'});
-    return res.json({accessToken:token});
+    res.cookie("jwt", token, {httpOnly: true, maxAge: 1000 * 60 * 30});
+    res.send("done.");
   });
 });
 

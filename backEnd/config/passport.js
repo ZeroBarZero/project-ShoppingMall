@@ -7,6 +7,15 @@ var models = require('../models');
 const SECRET = "s!2r#rcv[eT)";
 var _user = models.user;
 
+var cookieExtractor = function(req) {
+    var token = null;
+    if (req && req.cookies)
+    {
+        token = req.cookies["jwt"];
+    }
+    return token;
+};
+
 module.exports = (passport) => {
   passport.use('localSignup', new localStrategy({
     usernameField: 'email',
@@ -32,10 +41,9 @@ module.exports = (passport) => {
   }));
 
   passport.use(new JwtStrategy({
-  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt"),
+  jwtFromRequest: req => cookieExtractor(req),
   secretOrKey: SECRET
 }, (payload, next) => {
-  console.log(payload);
   _user.findOne({where:{id:payload.id}}).then((user) => {
     if (payload.id !== user.id) {
       next(null, false);
