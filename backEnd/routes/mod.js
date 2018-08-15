@@ -56,10 +56,7 @@ router.put('/product/:id', passport.authenticate('jwt', {session: false}), (req,
   res.redirect('product');
 });
 
-/* delete p
-{
-  id
-}*/
+/* delete p */
 router.delete('/product/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
   _product.destroy({where: {id:req.params.id}}).then((result) => {
 
