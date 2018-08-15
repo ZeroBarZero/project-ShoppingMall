@@ -8,3 +8,14 @@
         menu.classList.toggle('is-active');
     });
 })();
+
+
+function issame (obj) {
+  var pw = document.getElementById('pw').value
+  var confirmpw = document.getElementById('pwcheck').value
+
+  if (pw !== confirmpw) {
+    document.getElementById('same').innerHTML = 'wrong password'
+    return false
+  }
+}

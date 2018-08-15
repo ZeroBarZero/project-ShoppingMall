@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar">
+    <nav class="navbar is-fixed-top">
             <div class="container">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="../">
@@ -27,9 +27,8 @@
                                 <router-link to="/" exact>Tour</router-link>
                         </div>
                         <div class="navbar-item is-active">
-                                <router-link to="/" exact>Project</router-link>
+                                <router-link to="/Projectlist" exact>Project</router-link>
                         </div>
-
                         <div class="navbar-item is-active">
                                 <router-link to="/" exact>Seoul</router-link>
                         </div>
@@ -41,22 +40,13 @@
                                     Account
                                 </a>
                             <div class="navbar-dropdown">
-                                <a class="navbar-item">
-                                        Dashboard
-                                    </a>
-                                <a class="navbar-item">
-                                        Profile
-                                    </a>
-                                <a class="navbar-item">
-                                        Settings
-                                    </a>
+                              <div class="navbar-item">
+                                <router-link to="/login" exact>Login</router-link>
+                              </div>
+                              <div class="navbar-item">
+                                <router-link to="/mypage">Mypage</router-link>
+                              </div>
                                 <hr class="navbar-divider">
-                                <div class="navbar-item">
-                                  <router-link to="/Login" exact>Login</router-link>
-                                </div>
-                                <div class="navbar-item">
-                                  <router-link to="/logout">Logout</router-link>
-                                </div>
                                 <div class="navbar-item">
                                   <router-link to="/admin" exact>Admin</router-link>
                                 </div>
