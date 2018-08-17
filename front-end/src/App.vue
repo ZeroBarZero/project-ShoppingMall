@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="../">
-                            <img src="../images/bulma.png" alt="Logo">
+                            <img src="https://cdn.imweb.me/thumbnail/20180412/5acef10761d81.png" alt="Logo">
                         </a>
                     <span class="navbar-burger burger" data-target="navbarMenu">
                             <span></span>
@@ -57,19 +57,20 @@
             </div>
         </nav>
         <!-- END NAV -->
+    <div id="super-body">
     <router-view></router-view>
+    </div>
     <footer class="footer">
             <div class="container">
                 <div class="content has-text-centered">
-                    <div class="soc">
-                        <a href="#"><i class="fa fa-github-alt fa-2x" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
-                    </div>
+                    <img class="fr-dib fr-draggable fr-fil" src="https://cdn.imweb.me/upload/S201803155aa9f28f5029a/5aceba9a45444.png" style="width: 70px; height: 39.7297px;">
+                  <div class="soc">
+                      <a href="http://www.instagram.com/anyoung_seoul/"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                      <a href="http://www.facebook.com/anyoungseoul/"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+                  </div>
                     <p>
-                        <strong>Bulma</strong> by <a href="http://jgthms.com">Jeremy Thomas</a>.
-                        The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. <br>
+                        <strong>Bulma</strong> by <a href="#">이용약관</a>.
+                        The source code is licensed <a href="#">개인정보처리방침</a>. <br>
                     </p>
                 </div>
             </div>
@@ -84,6 +85,10 @@ export default {
 </script>
 
 <style>
+#super-body {
+  min-height: 100vh;
+  padding-top: 100px;
+}
 .footer{
 background-color: #222831;
 color: lemonchiffon;

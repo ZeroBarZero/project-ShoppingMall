@@ -1,140 +1,134 @@
 <template>
-<div id="projectlist">
-  <div id="main">
-<div>
-  <div id="root_isotope" class="isoDefault">
-    <div v-isotope-for="element in list" :options='option' @click="selected=element">
-      {{element.name}}
-      <br> {{element.id}}
+  <div class="profile-items">
+    <div class="columns is-multiline is-mobile">
+      <div class="column is-one-third" v-if="person.isMe">
+        <router-link :to="{ name: 'Contribute' }" tag="div" class="button sui-contribute-new-item">
+          <div class="content">
+            <p>
+              <span class="icon">
+                <i class="fa fa-plus"></i>
+              </span>
+            </p>
+            <p>
+              ADD ITEM
+            </p>
+          </div>
+        </router-link>
+      </div>
+      <ul v-for="item in itemList">
+        <div class="column is-one-third">
+          <div class="image is-1by1" @click="openModal(item)">
+            <img :src="item.content"/>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="modal" :class="modalClass">
+      <div class="modal-background" @click="closeModal()"></div>
+      <div class="modal-content">
+        <div class="box">
+          <div class="columns">
+            <div class="column">
+              <div class="image is-1by1">
+                <img :src="modalData.content" />
+              </div>
+            </div>
+            <div class="column">
+              <h1 class="title">
+                Some {{ modalData.type }}
+              </h1>
+              <h2 class="subtitle">
+                <small>
+                  Curator: {{ modalData.owner.name }}
+                  <br />
+                  ImageId: {{ modalData.itemId }}
+                </small>
+              </h2>
+              <p>
+                <small>
+                  {{ modalData.caption }}
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close" @click="closeModal()"></button>
     </div>
   </div>
-</div>
-
-<div id="change">
-  <button @click="add">Add</button>
-  <button @click="replace">Replace</button>
-</div>
-<div id="filter">
-  <div>
-    <input type="text" v-model="filterText" placeholder="no filter">
-    <button :class="[filterOption==='filterByText' ? 'is-checked' : '']" @click="filter('filterByText')">Filter</button>
-  </div>
-  <button :class="[filterOption==='isEven' ? 'is-checked' : '']" @click="filter('isEven')">Filter Even</button>
-  <button :class="[filterOption==='isOdd' ? 'is-checked' : '']" @click="filter('isOdd')">Filter Odd</button>
-  <button @click="filter()">Unfilter</button>
-</div>
-<div id="sort">
-  <button :class="[sortOption==='name' ? 'is-checked' : '']" @click="sort('name')">Sort by name</button>
-  <button :class="[sortOption==='id' ? 'is-checked' : '']" @click="sort('id')">Sort by id</button>
-  <button @click="shuttle">Shuttle</button>
-</div>
-<div>
-  <div v-if="selected" class="item">
-    <input type="text" name="" v-model="selected.name">
-    <br>
-    <input type="text" name="" v-model="selected.id">
-  </div>
-</div>
-</div>
-
-</div>
-
 </template>
 
 <script>
-var count = 0;
-
-var vm = new Vue({
-  el: "#main",
-  data: {
-    list: [{
-      name: "John",
-      id: 25
-    }, {
-      name: "Joao",
-      id: 7
-    }, {
-      name: "Albert",
-      id: 100
-    }, {
-      name: "Jean",
-      id: 100
-    }],
-    selected: null,
-    sortOption: null,
-    filterOption: null,
-    filterText: "",
-    option: {
-      getSortData: {
-        id: "id",
-        name: function(itemElem) {
-          return itemElem.name.toLowerCase();
-        }
-      },
-      getFilterData: {
-        isEven: function(itemElem) {
-          return itemElem.id % 2 === 0;
-        },
-        isOdd: function(itemElem) {
-          return itemElem.id % 2 !== 0;
-        },
-        filterByText: function(itemElem) {
-          return itemElem.name.toLowerCase().includes(this.filterText.toLowerCase());
-        }
-      }
-    }
+/* eslint-disable */
+import { mapGetters, mapActions } from 'vuex';
+export default {
+  name: 'profileItems',
+  props: ['person'],
+  data() {
+    return {
+      isModalVisible: false,
+      selectedItem: null,
+    };
+  },
+  computed: {
+    ...mapGetters([
+      'items',
+      'itemOwner',
+    ]),
+    modalClass() {
+      return {
+        'is-active': this.isModalVisible,
+      };
+    },
+    itemList() {
+      return this.items;
+    },
+    modalData() {
+      const selectedItem = this.selectedItem || {};
+      const user = this.itemOwner || {};
+      return {
+        ...selectedItem,
+        owner: user,
+      };
+    },
   },
   methods: {
-    add: function() {
-      this.list.push({
-        name: 'Juan',
-        id: count++
+    ...mapActions([
+      'fetchContentByUserId',
+    ]),
+    openModal(item) {
+      this.selectedItem = item;
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+      this.selectedItem = null;
+    },
+    fetchItems() {
+      this.fetchContentByUserId({
+        profileId: this.person.profileId,
       });
     },
-    replace: function() {
-      this.list = [{
-        name: 'Edgard',
-        id: count++
-      }, {
-        name: 'James',
-        id: count++
-      }]
+  },
+  created() {
+    this.fetchItems();
+  },
+  watch: {
+    person(current, previous) {
+      if (current !== previous) {
+        this.fetchItems();
+      }
     },
-    sort: function(key) {
-      this.isotopeSort(key);
-      this.sortOption = key;
-    },
-    filter: function(key) {
-      if (this.filterOption == key)
-        key = null;
-      this.isotopeFilter(key);
-      this.filterOption = key;
-    },
-    shuttle: function() {
-      this.isotopeShuttle();
-      this.sortOption = null;
-    }
-  }
-});
+  },
+};
 </script>
 
-<style>
-.item {
-  background-color: #eee;
-  padding: 10px;
-  width: 200px;
-  height: 200px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-  font-family: monospace;
-  color: #333;
-}
-
-.is-checked {
-  background-color: #28F;
-}
-
-.isoDefault {
-  min-height: 210px;
+<style lang="scss">
+.sui-contribute-new-item {
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
