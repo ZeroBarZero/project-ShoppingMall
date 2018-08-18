@@ -27,7 +27,7 @@
                                 <router-link to="/" exact>Tour</router-link>
                         </div>
                         <div class="navbar-item is-active">
-                                <router-link to="/Projectlist" exact>Project</router-link>
+                                <router-link to="/projectlist" exact>Project</router-link>
                         </div>
                         <div class="navbar-item is-active">
                                 <router-link to="/" exact>Seoul</router-link>

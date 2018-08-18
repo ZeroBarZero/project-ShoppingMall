@@ -1,7 +1,7 @@
 <template>
   <div class="profile-items">
     <div class="columns is-multiline is-mobile">
-      <div class="column is-one-third" v-if="person.isMe">
+      <div class="column is-one-third" >
         <router-link :to="{ name: 'Contribute' }" tag="div" class="button sui-contribute-new-item">
           <div class="content">
             <p>
@@ -15,13 +15,13 @@
           </div>
         </router-link>
       </div>
-      <ul v-for="item in itemList">
-        <div class="column is-one-third">
+      <template  v-for="item in itemList">
+        <div v-bind:key="item.content" class="column is-one-third">
           <div class="image is-1by1" @click="openModal(item)">
             <img :src="item.content"/>
           </div>
         </div>
-      </ul>
+      </template>
     </div>
     <div class="modal" :class="modalClass">
       <div class="modal-background" @click="closeModal()"></div>
@@ -106,7 +106,7 @@ export default {
     },
     fetchItems() {
       this.fetchContentByUserId({
-        profileId: this.person.profileId,
+        profileId: "helloseoul",
       });
     },
   },
@@ -130,5 +130,23 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.media-content .content.max-lines--one-plus-three {
+  // 6em is based on the default line-height of 1.5em
+  max-height: 6em;
+  overflow: hidden;
+  position: relative;
+}
+
+// This will fade out the last line to 'white' (the assumed background colour)
+.media-content .content.max-lines--one-plus-three::before {
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 75%);
+  content: '\00200c';
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 4.5em;
+  width: 30%;
 }
 </style>

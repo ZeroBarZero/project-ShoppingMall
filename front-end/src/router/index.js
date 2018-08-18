@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '@/components/Login'
 import Admin from '@/components/Admin'
 import Register from '@/components/Register'
-import Project from '@/components/Projectlist'
+import Projectlist from '@/components/Projectlist'
 import Storeitem from '@/components/Storeitem'
 import Storelist from '@/components/Storelist'
 import Seoullist from '@/components/Seoullist'
@@ -29,8 +29,8 @@ export default new VueRouter({
     },
     {
       path: '/projectlist',
-      name: 'Project',
-      component: Project
+      name: 'Projectlist',
+      component: Projectlist
     },
     {
       path: '/storeitem',
