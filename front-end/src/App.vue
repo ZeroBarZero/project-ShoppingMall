@@ -21,7 +21,7 @@
                                 <router-link to="/" exact>About</router-link>
                         </div>
                         <div class="navbar-item is-active">
-                                <router-link to="/" exact>Store</router-link>
+                                <router-link to="/storelist" exact>Store</router-link>
                         </div>
                         <div class="navbar-item is-active">
                                 <router-link to="/" exact>Tour</router-link>
