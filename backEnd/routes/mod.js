@@ -41,19 +41,54 @@ router.post('/product', passport.authenticate('jwt', { session: false }), (req, 
 
 /* update p
 {
-  name,
-  category,
-  price
+  name
 }*/
-router.put('/product/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
-  const {name, category, price} = req.body;
-  console.log(req);
-  _product.update({name: name, category: category, price: price}, {where: {id:req.params.id}}).then((result) => {
+router.put('/product/:id/u/name', passport.authenticate('jwt', {session: false}), (req, res) => {
+  const {name} = req.body;
+  _product.update({name: name}, {where: {id:req.params.id}}).then((result) => {
 
   }).catch(function(err) {
 
   });
-  res.redirect('product');
+});
+
+/* update p
+{
+  category
+}*/
+router.put('/product/:id/u/category', passport.authenticate('jwt', {session: false}), (req, res) => {
+  const {category} = req.body;
+  _product.update({category:category}, {where: {id:req.params.id}}).then((result) => {
+
+  }).catch(function(err) {
+
+  });
+});
+
+/* update p
+{
+  price
+}*/
+router.put('/product/:id/u/price', passport.authenticate('jwt', {session: false}), (req, res) => {
+  const {category} = req.body;
+  _product.update({price:price}, {where: {id:req.params.id}}).then((result) => {
+
+  }).catch(function(err) {
+
+  });
+});
+
+/* update p
+{
+  stock
+}*/
+router.put('/product/:id/u/stock', passport.authenticate('jwt', {session: false}), (req, res) => {
+  const {category} = req.body;
+  _product.update({stock:stock}, {where: {id:req.params.id}}).then((result) => {
+
+  }).catch(function(err) {
+
+  });
 });
 
 /* delete p */

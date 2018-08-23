@@ -38,7 +38,7 @@ router.post('/login', (req,res) => {
   const {email, password} = req.body; // req.body
   _user.findOne({where:{email:email}}).then((user) => {
     if(!user || !bCrypt.compareSync(password, user.password)){
-      return res.status(401).end;
+      res.send("sry.");
     }
     const token = jwt.sign({id:user.id, email:user.email, isVerificated:user.isVerificated}, SECRET, {expiresIn:'1d'});
     res.cookie("jwt", token, {httpOnly: true, maxAge: 1000 * 60 * 30});
