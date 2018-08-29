@@ -47,8 +47,8 @@ router.post('/login', (req,res) => {
 });
 
 router.get('/isAuth', passport.authenticate('jwt', { session: false }), function(req, res) {
-  if (req.user) res.send("true");
-  else res.send("false");
+  if (req.user) res.send(true);
+  else res.send(false);
 });
 
 router.get('/logout', (req, res) => {

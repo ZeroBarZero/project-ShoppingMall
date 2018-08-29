@@ -39,17 +39,25 @@
                             <a class="navbar-link">
                                     Account
                                 </a>
-                            <div class="navbar-dropdown">
-                              <div class="navbar-item">
-                                <router-link to="/login" exact>Login</router-link>
-                              </div>
+                            <div class="navbar-dropdown" v-if="getAuth()">
                               <div class="navbar-item">
                                 <router-link to="/mypage">Mypage</router-link>
+                              </div>
+                              <div class="navbar-item">
+                                <router-link to="/login" exact>logout</router-link>
                               </div>
                                 <hr class="navbar-divider">
                                 <div class="navbar-item">
                                   <router-link to="/admin" exact>Admin</router-link>
                                 </div>
+                            </div>
+                            <div class="navbar-dropdown" v-else>
+                              <div class="navbar-item">
+                                <router-link to="/mypage">Sign up</router-link>
+                              </div>
+                              <div class="navbar-item">
+                                <router-link to="/login" exact>login</router-link>
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +97,14 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    getAuth () {
+      this.$http.get('/api/user/isAuth').then((response) => {
+        return response.data
+      })
+    }
+  }
 }
 </script>
 
