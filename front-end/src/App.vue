@@ -86,8 +86,11 @@ export default {
 
 <style>
 #super-body {
-  min-height: 100vh;
-  padding-top: 100px;
+  margin-top: 60px;
+}
+.navbar
+{
+  z-index: 999;
 }
 .footer{
 background-color: #222831;

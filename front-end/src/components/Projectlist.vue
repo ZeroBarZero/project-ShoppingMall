@@ -2,24 +2,11 @@
   <div class="container">
     <div class="profile-items">
       <div class="columns is-multiline is-mobile">
-        <div class="column is-one-third">
-          <router-link :to="{ name: 'Contribute' }" tag="div" class="button sui-contribute-new-item">
-            <div class="content">
-              <p>
-                <span class="icon">
-                  <i class="fa fa-plus"></i>
-                </span>
-              </p>
-              <p>
-                ADD ITEM
-              </p>
-            </div>
-          </router-link>
-        </div>
-        <template  v-for="item in itemList">
-          <div v-bind:key="item.content" class="column is-one-third">
+
+        <template  v-for="(n, index) in 9">
+          <div v-bind:key="index" class="column is-one-third">
             <div class="image is-1by1" @click="openModal(item)">
-              <img :src="item.content"/>
+              <img src="https://via.placeholder.com/256x256"/>
             </div>
           </div>
         </template>
@@ -74,6 +61,8 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'routeParams',
+      'routeQueryParams',
       'items',
       'itemOwner',
     ]),
@@ -106,16 +95,31 @@ export default {
       this.isModalVisible = false;
       this.selectedItem = null;
     },
+    fetchProfile(profileId) {
+      this.fetchUserById({
+        profileId,
+      }),
+      this.setActiveUserId({
+        profileId,
+      })
+    },
     fetchItems() {
       this.fetchContentByUserId({
-        profileId: "HELLOSEOUL",
+        profileId: this.fetchProfile('me')
       });
     },
   },
   created() {
+    this.fetchProfile('me');
+    this.fetchProfile(this.routeParams.profileId);
     this.fetchItems();
   },
   watch: {
+    routeParams(current, previous) {
+     if (current.profileId !== previous.profileId) {
+       this.fetchProfile(current.profileId);
+     }
+   },
     person(current, previous) {
       if (current !== previous) {
         this.fetchItems();

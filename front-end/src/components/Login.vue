@@ -13,20 +13,20 @@
                       <form>
                           <div class="field">
                               <div class="control">
-                                  <input class="input is-large" type="email" placeholder="Your Email" autofocus="">
+                                  <input v-model="form.email" class="input is-large" type="email" placeholder="Your Email" autofocus="">
                               </div>
                           </div>
 
                           <div class="field">
                               <div class="control">
-                                  <input class="input is-large" type="password" placeholder="Your Password">
+                                  <input v-model="form.password" class="input is-large" type="password" placeholder="Your Password">
                               </div>
                           </div>
                           <div class="field">
                               <label class="checkbox">
-                <input type="checkbox">
-                Remember me
-              </label>
+                                <input type="checkbox">
+                                Remember me
+                              </label>
                           </div>
                           <button class="button is-block is-info is-large is-fullwidth">Login</button>
                       </form>
@@ -45,10 +45,25 @@
 
 <script>
 export default {
-  name: 'Login'
+  data () {
+    return {
+      form: {
+        email: '',
+        password: ''
+      },
+      show: true
+    }
+  },
+  methods: {
+    onSubmit (evt) {
+      evt.preventDefault()
+      this.$http.post('/api/user/login', this.form).then((response) => {
+        alert(JSON.stringify(response.data))
+      })
+    }
+  }
 }
 </script>
-
 <style>
 
 #login {

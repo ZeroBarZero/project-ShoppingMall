@@ -38,7 +38,7 @@
                           <button class="button is-block is-info is-large is-fullwidth">Sign up</button>
                       </form>
                   </div><p class="has-text-grey">
-                      <router-link to="/login">Alreadt Member?</router-link>
+                      <router-link to="/login">Already Member?</router-link>
                   </p>
               </div>
           </div>

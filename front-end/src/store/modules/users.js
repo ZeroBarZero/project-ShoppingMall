@@ -10,7 +10,7 @@ const localState = {
   following: [],
   followedBy: [],
   activeUserId: 'me',
-  meUserId: null,
+  meUserId: 'me',
 };
 
 const localGetters = {

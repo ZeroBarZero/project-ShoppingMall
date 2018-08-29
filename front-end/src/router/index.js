@@ -7,6 +7,7 @@ import Projectlist from '@/components/Projectlist'
 import Storeitem from '@/components/Storeitem'
 import Storelist from '@/components/Storelist'
 import Seoullist from '@/components/Seoullist'
+import Profilecollection from '@/components/Profilecollection'
 
 Vue.use(VueRouter)
 
@@ -46,6 +47,11 @@ export default new VueRouter({
       path: '/seoullist',
       name: 'Seoulllist',
       component: Seoullist
+    },
+    {
+      path: '/profilecollection',
+      name: 'Profilecollection',
+      component: Profilecollection
     }
   ]
 })
