@@ -39,12 +39,12 @@
                             <a class="navbar-link">
                                     Account
                                 </a>
-                            <div class="navbar-dropdown" v-if="getAuth()">
+                            <div class="navbar-dropdown" v-if="this.isAuth">
                               <div class="navbar-item">
                                 <router-link to="/mypage">Mypage</router-link>
                               </div>
                               <div class="navbar-item">
-                                <router-link to="/login" exact>logout</router-link>
+                                <router-link to="/logout" exact>logout</router-link>
                               </div>
                                 <hr class="navbar-divider">
                                 <div class="navbar-item">
@@ -98,12 +98,20 @@
 <script>
 export default {
   name: 'App',
+  data () {
+    return {
+      isAuth: false
+    }
+  },
   methods: {
     getAuth () {
       this.$http.get('/api/user/isAuth').then((response) => {
-        return response.data
+        this.isAuth = response.data
       })
     }
+  },
+  created () {
+    this.getAuth()
   }
 }
 </script>

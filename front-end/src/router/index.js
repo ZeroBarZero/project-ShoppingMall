@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
+import Logout from '@/components/Logout'
 import Admin from '@/components/Admin'
 import Register from '@/components/Register'
 import Projectlist from '@/components/Projectlist'
@@ -23,6 +24,11 @@ export default new VueRouter({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/logout',
+      name: 'Logout',
+      component: Logout
     },
     {
       path: '/admin',

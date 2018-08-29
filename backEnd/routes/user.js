@@ -52,7 +52,8 @@ router.get('/isAuth', passport.authenticate('jwt', { session: false }), function
 });
 
 router.get('/logout', (req, res) => {
-  res.clearCookie('jwt');
+  res.clearCookie("jwt");
+  res.send('done.');
 });
 
 
