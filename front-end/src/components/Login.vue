@@ -56,7 +56,12 @@ export default {
     }
   },
   methods: {
+<<<<<<< HEAD
     onSubmit : function (evt) {
+=======
+    onSubmit: function (evt) {
+      evt.preventDefault()
+>>>>>>> 072e45052616f2a1ca242b09f042d1a82295aec6
       this.$http.post('/api/user/login', this.form).then((response) => {
         alert(JSON.stringify(response.data))
       })
