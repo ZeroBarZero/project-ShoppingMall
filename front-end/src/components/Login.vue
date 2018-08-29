@@ -28,7 +28,7 @@
                                 Remember me
                               </label>
                           </div>
-                          <button class="button is-block is-info is-large is-fullwidth">Login</button>
+                          <button v-on:click="onSubmit" class="button is-block is-info is-large is-fullwidth">Login</button>
                       </form>
                   </div>
                   <p class="has-text-grey">
@@ -55,7 +55,7 @@ export default {
     }
   },
   methods: {
-    onSubmit (evt) {
+    onSubmit: function (evt) {
       evt.preventDefault()
       this.$http.post('/api/user/login', this.form).then((response) => {
         alert(JSON.stringify(response.data))
