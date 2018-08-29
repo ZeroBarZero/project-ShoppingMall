@@ -84,9 +84,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions([
-      'fetchContentByUserId',
-    ]),
     openModal(item) {
       this.selectedItem = item;
       this.isModalVisible = true;
@@ -94,38 +91,13 @@ export default {
     closeModal() {
       this.isModalVisible = false;
       this.selectedItem = null;
-    },
-    fetchProfile(profileId) {
-      this.fetchUserById({
-        profileId,
-      }),
-      this.setActiveUserId({
-        profileId,
-      })
-    },
-    fetchItems() {
-      this.fetchContentByUserId({
-        profileId: this.fetchProfile('me')
-      });
-    },
+    }
   },
   created() {
     this.fetchProfile('me');
     this.fetchProfile(this.routeParams.profileId);
     this.fetchItems();
-  },
-  watch: {
-    routeParams(current, previous) {
-     if (current.profileId !== previous.profileId) {
-       this.fetchProfile(current.profileId);
-     }
-   },
-    person(current, previous) {
-      if (current !== previous) {
-        this.fetchItems();
-      }
-    },
-  },
+  }
 };
 </script>
 

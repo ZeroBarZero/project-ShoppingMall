@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Admin from '@/components/Admin'
 import Register from '@/components/Register'
@@ -12,6 +13,11 @@ Vue.use(VueRouter)
 
 export default new VueRouter({
   routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Home
+    },
     {
       path: '/login',
       name: 'Login',
