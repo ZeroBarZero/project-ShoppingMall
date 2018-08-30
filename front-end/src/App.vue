@@ -44,7 +44,7 @@
                                 <router-link to="/mypage">Mypage</router-link>
                               </div>
                               <div class="navbar-item">
-                                <router-link to="/logout" exact>logout</router-link>
+                                <router-link to="/logout" exact>Logout</router-link>
                               </div>
                                 <hr class="navbar-divider">
                                 <div class="navbar-item">
@@ -56,7 +56,7 @@
                                 <router-link to="/mypage">Sign up</router-link>
                               </div>
                               <div class="navbar-item">
-                                <router-link to="/login" exact>login</router-link>
+                                <router-link to="/login" exact>Login</router-link>
                               </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@ export default {
     }
   },
   methods: {
-    getAuth () {
+    getAuth: function () {
       this.$http.get('/api/user/isAuth').then((response) => {
         this.isAuth = response.data
       })

@@ -9,7 +9,7 @@ export default {
   },
   created: function () {
     this.$http.get('/api/user/logout').then((response) => {
-
+      this.$router.push({path: '/'})
     })
   }
 }
