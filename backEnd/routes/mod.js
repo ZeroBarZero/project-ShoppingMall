@@ -1,6 +1,7 @@
 var express = require('express');
 var models = require('../models');
 var _product = models.product;
+var _project = models.project;
 var passport = require('passport');
 var multer = require('multer');
 const SECRET = "s!2r#rcv[eT)";
@@ -117,6 +118,35 @@ router.delete('/product/:id', passport.authenticate('jwt', {session: false}), (r
   _product.destroy({where: {id:req.params.id}}).then((result) => {
 
   }).catch(function(err) {
+
+  });
+  res.redirect('product');
+});
+
+router.get('/project', passport.authenticate('jwt', { session: false }), (req, res) =>{
+  _project.findAll().then((data) => {
+    res.send(data);
+  });
+});
+
+router.post('/project', passport.authenticate('jwt', { session: false }), upload.array('imgs', 4), (req, res) =>{
+  const {title, contents} = req.body;
+  var files = req.files;
+  var filesName = "";
+
+  for (var i = 0; i < files.length; i++){
+    filesName += files[i].originalname
+    if (i < files.length){
+      filesName += ','
+    }
+  }
+
+  var projectData = {
+    title: title,
+    contents: contents,
+    img: filesName
+  }
+  _project.create(projectData).then((data) => {
 
   });
   res.redirect('product');
