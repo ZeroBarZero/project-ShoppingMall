@@ -16,23 +16,25 @@ module.exports = function(sequelize, Sequelize) {
         },
         category: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: false,
+            notEmpty: true
         },
         price: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          notEmpty: true
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            notEmpty: true
         },
         stock: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          notEmpty: true,
-          defaultValue: 0
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            notEmpty: true,
+            defaultValue: 0
         },
         img: {
-          type: Sequelize.STRING,
-          defaultValue: false
+            type: Sequelize.STRING,
+            allowNull: false
         }
+
     },
     {
       timestamps: true,

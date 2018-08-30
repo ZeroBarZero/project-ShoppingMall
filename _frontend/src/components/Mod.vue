@@ -30,7 +30,8 @@ export default {
     return {
       fields: ['id', 'name', 'category', 'price', 'stock', 'img', 'created', 'updated'],
       items: [],
-      cvalue: ''
+      cvalue: '',
+      show: true
     }
   },
   methods: {

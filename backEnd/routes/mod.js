@@ -2,9 +2,19 @@ var express = require('express');
 var models = require('../models');
 var _product = models.product;
 var passport = require('passport');
+var multer = require('multer');
 const SECRET = "s!2r#rcv[eT)";
-
 var router = express.Router();
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '/public/products');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  })
+})
 
 router.get('/', function(req, res, next) {
   res.render('index', { data: 'Express' });
@@ -26,12 +36,23 @@ router.get('/product', passport.authenticate('jwt', { session: false }), (req, r
   category,
   price
 }*/
-router.post('/product', passport.authenticate('jwt', { session: false }), (req, res) =>{
+router.post('/product', passport.authenticate('jwt', { session: false }), upload.array('imgs', 4), (req, res) =>{
   const {name, category, price} = req.body;
+  var files = req.files;
+  var filesName = "";
+
+  for (var i = 0; i < files.length; i++){
+    filesName += files[i].originalname
+    if (i < files.length){
+      filesName += ','
+    }
+  }
+
   var productData = {
     name : name,
     category: category,
-    price: price
+    price: price,
+    img: filesName
   }
   _product.create(productData).then((data) => {
 
