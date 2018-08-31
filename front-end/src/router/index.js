@@ -9,6 +9,7 @@ import Projectlist from '@/components/Projectlist'
 import Storeitem from '@/components/Storeitem'
 import Storelist from '@/components/Storelist'
 import Seoullist from '@/components/Seoullist'
+import Seoulitem from '@/components/Seoulitem'
 
 Vue.use(VueRouter)
 
@@ -16,9 +17,11 @@ export default new VueRouter({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/home',
+      alias: '/',
       name: 'Home',
       component: Home
+
     },
     {
       path: '/login',
@@ -59,6 +62,14 @@ export default new VueRouter({
       path: '/seoullist',
       name: 'Seoulllist',
       component: Seoullist
+    },
+    {
+      path: '/seoulitem',
+      name: 'Seoulitem',
+      component: Seoulitem
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return {x: 0, y: 0}
+  }
 })

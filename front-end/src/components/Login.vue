@@ -1,6 +1,6 @@
 <template>
 <div id="login">
-  <section class="hero is-success is-fullheight">
+  <section class="hero is-fullheight">
       <div class="hero-body">
           <div class="container has-text-centered">
               <div class="column is-4 is-offset-4">
@@ -41,6 +41,7 @@
   </section>
 </div>
 </template>
+
 <script>
 /* eslint-disable */
 export default {
@@ -63,8 +64,8 @@ export default {
   }
 }
 </script>
-<style>
 
+<style>
 #login {
   font-family: 'Open Sans', serif;
   font-size: 14px;

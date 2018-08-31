@@ -1,4 +1,3 @@
-
 <template>
   <div id="seoul" class="container">
     <div class="section">
@@ -27,7 +26,7 @@
                    <h2>Opening a door to the future</h2>
                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
                    <p class="read-more">
-                     <a href="#">Read More</a>
+                     <a href="/seoulitem">Read More</a>
                    </p>
                  </div>
                </div>
