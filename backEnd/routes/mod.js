@@ -6,16 +6,17 @@ var passport = require('passport');
 var multer = require('multer');
 const SECRET = "s!2r#rcv[eT)";
 var router = express.Router();
-const upload = multer({
+var upload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '/public/products');
+      cb(null, './public/images/products');
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname);
     }
   })
-})
+}).any();
+
 
 router.get('/', function(req, res, next) {
   res.render('index', { data: 'Express' });
@@ -37,7 +38,7 @@ router.get('/product', passport.authenticate('jwt', { session: false }), (req, r
   category,
   price
 }*/
-router.post('/product', passport.authenticate('jwt', { session: false }), upload.array('imgs', 4), (req, res) =>{
+router.post('/product', passport.authenticate('jwt', { session: false }), (req, res) =>{
   const {name, category, price} = req.body;
   var files = req.files;
   var filesName = "";
@@ -59,6 +60,20 @@ router.post('/product', passport.authenticate('jwt', { session: false }), upload
 
   });
   res.redirect('product');
+});
+
+router.post('/test1', function (req, res) {
+
+  upload(req, res, function (err) {
+    if(err){
+      console.log(err);
+      return res.end('err');
+    }
+    else{
+      console.log(req.body);
+      console.log(req.files);
+    }
+  })
 });
 
 /* update p
@@ -129,7 +144,7 @@ router.get('/project', passport.authenticate('jwt', { session: false }), (req, r
   });
 });
 
-router.post('/project', passport.authenticate('jwt', { session: false }), upload.array('imgs', 4), (req, res) =>{
+router.post('/project', passport.authenticate('jwt', { session: false }), (req, res) =>{
   const {title, contents} = req.body;
   var files = req.files;
   var filesName = "";

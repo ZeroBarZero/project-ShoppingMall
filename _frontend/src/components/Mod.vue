@@ -1,48 +1,40 @@
 <template>
-  <b-container>
-    <b-table striped hover :items="items">
-      <template slot="name" slot-scope="data">
-        <b-button :variant="primary">
-          {{data.value}}
-        </b-button>
-      </template>
-      <template slot="category" slot-scope="data">
-        <b-button :variant="primary">
-          {{data.value}}
-        </b-button>
-      </template>
-      <template slot="price" slot-scope="data">
-        <b-button :variant="primary">
-          {{data.value}}
-        </b-button>
-      </template>
-      <template slot="stock" slot-scope="data">
-        <b-button :variant="primary">
-          {{data.value}}
-        </b-button>
-      </template>
-    </b-table>
-  </b-container>
+  <div>
+    <b-form-input v-model="text1"
+                  type="text"
+                  placeholder="Enter your name"></b-form-input>
+    <p>Value: {{ text1 }}</p>
+    <b-form-input v-model="text2"
+                  type="text"
+                  placeholder="Enter your password"></b-form-input>
+    <p>Value: {{ text2 }}</p>
+    <b-form-file v-model="files" :state="Boolean(files)" multiple placeholder="Choose a file..."></b-form-file>
+    <b-button variant="warning" @click="test">실험중</b-button>
+  </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      fields: ['id', 'name', 'category', 'price', 'stock', 'img', 'created', 'updated'],
-      items: [],
-      cvalue: '',
-      show: true
+      text1: '',
+      text2: '',
+      files: []
     }
   },
   methods: {
-    getProduct () {
-      this.$http.get('/api/mod/product').then((response) => {
-        this.items = response.data
+    test () {
+      let formData = new FormData()
+      formData.append('test1', this.text1)
+      formData.append('test2', this.text2)
+      for (var i = 0; i < this.files.length; i++) {
+        let file = this.files[i]
+        formData.append('files[' + i + ']', file)
+      }
+      this.$http.post('/api/mod/test1', formData, {headers: {
+        'Content-Type': 'multipart/form-data'
+      }}).then((response) => {
       })
     }
-  },
-  created: function () {
-    this.getProduct()
   }
 }
 </script>
