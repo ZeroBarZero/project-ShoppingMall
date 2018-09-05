@@ -49,11 +49,6 @@
   box-sizing: border-box;
 }
 
-body {
-  background: #f1f1f1;
-  margin: 2rem;
-}
-
 $color_white: #fff;
 $color_prime: #5ad67d;
 $color_grey: #e2e2e2;

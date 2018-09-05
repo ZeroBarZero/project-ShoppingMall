@@ -5,7 +5,7 @@
                   <a class="navbar-item" href="../">
                           <img src="https://cdn.imweb.me/thumbnail/20180412/5acef10761d81.png" alt="Logo">
                   </a>
-                  <span class="navbar-burger burger" data-target="navbarMenu">
+                  <span class="navbar-burger burger" onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');" data-target="navbarMenu">
                   <span></span>
                   <span></span>
                   <span></span>

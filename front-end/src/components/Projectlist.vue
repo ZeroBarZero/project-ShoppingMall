@@ -3,7 +3,7 @@
     <div class="profile-items">
       <div class="columns is-multiline is-mobile">
 
-        <template  v-for="(n, index) in 9">
+        <template  v-for="(n, index) in 10">
           <div v-bind:key="index" class="column is-one-third">
             <div class="image is-1by1" @click="openModal(item)">
               <img src="https://via.placeholder.com/256x256"/>

@@ -10,6 +10,8 @@ import Storeitem from '@/components/Storeitem'
 import Storelist from '@/components/Storelist'
 import Seoullist from '@/components/Seoullist'
 import Seoulitem from '@/components/Seoulitem'
+import Order from '@/components/Order'
+import OrderComplete from '@/components/OrderComplete'
 
 Vue.use(VueRouter)
 
@@ -67,6 +69,16 @@ export default new VueRouter({
       path: '/seoulitem',
       name: 'Seoulitem',
       component: Seoulitem
+    },
+    {
+      path: '/order',
+      name: 'Order',
+      component: Order
+    },
+    {
+      path: '/ordercomplete',
+      name: 'OrderComplete',
+      component: OrderComplete
     }
   ],
   scrollBehavior (to, from, savedPosition) {
