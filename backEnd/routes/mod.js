@@ -38,29 +38,36 @@ router.get('/product', passport.authenticate('jwt', { session: false }), (req, r
   category,
   price
 }*/
-router.post('/product', passport.authenticate('jwt', { session: false }), (req, res) =>{
-  const {name, category, price} = req.body;
-  var files = req.files;
-  var filesName = "";
+router.post('/product', passport.authenticate('jwt', { session: false }),function (req, res) {
 
-  for (var i = 0; i < files.length; i++){
-    filesName += files[i].originalname
-    if (i < files.length){
-      filesName += ','
+  upload(req, res, function (err) {
+    if(err){
+      console.log(err);
+      return res.end('err');
     }
-  }
+    else{
+      var filesName = ''
+      for (var i = 0; i < req.files.length; i++){
+        filesName += req.files[i].originalname
+        if (i < req.files.length-1){
+          filesName += ','
+        }
+      }
 
-  var productData = {
-    name : name,
-    category: category,
-    price: price,
-    img: filesName
-  }
-  _product.create(productData).then((data) => {
-
-  });
-  res.redirect('product');
+      var productData = {
+        name : req.body.name,
+        category: req.body.category,
+        price: req.body.price,
+        img: filesName
+      }
+      console.log(productData)
+      _product.create(productData).then((data) => {
+      });
+      res.redirect('product');
+    }
+  })
 });
+
 
 router.post('/test1', function (req, res) {
 

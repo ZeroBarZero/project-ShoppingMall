@@ -24,13 +24,14 @@ export default {
   methods: {
     test () {
       let formData = new FormData()
-      formData.append('test1', this.text1)
-      formData.append('test2', this.text2)
+      formData.append('name', 'qwewqewqe')
+      formData.append('category', 'dasdad')
+      formData.append('price', 'zzaxcasc')
       for (var i = 0; i < this.files.length; i++) {
         let file = this.files[i]
         formData.append('files[' + i + ']', file)
       }
-      this.$http.post('/api/mod/test1', formData, {headers: {
+      this.$http.post('/api/mod/product', formData, {headers: {
         'Content-Type': 'multipart/form-data'
       }}).then((response) => {
       })
