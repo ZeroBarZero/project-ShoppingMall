@@ -16,6 +16,7 @@
     "chance": "^1.0.16",
     "es6-promise": "^4.2.4",
     "isotope-layout": "^3.0.6",
+    "mixitup": "^3.3.0",
     "moment": "^2.22.2",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0",
