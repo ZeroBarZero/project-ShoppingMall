@@ -20,11 +20,28 @@ module.exports = function(sequelize, Sequelize) {
         },
         password: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: false,
+            notEmpty: true
         },
         isVerificated: {
           type: Sequelize.BOOLEAN,
           defaultValue: false
+        },
+        name: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        phoneNumber: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        address: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        postcode: {
+          type: Sequelize.STRING,
+          allowNull: false
         }
     },
     {

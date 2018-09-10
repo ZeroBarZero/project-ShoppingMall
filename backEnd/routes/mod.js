@@ -7,7 +7,7 @@ var multer = require('multer');
 const SECRET = "s!2r#rcv[eT)";
 var router = express.Router();
 var fs = require('fs');
-var upload = multer({
+var uploadProduct = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, './public/images/products');
@@ -40,7 +40,7 @@ router.get('/product', passport.authenticate('jwt', { session: false }), (req, r
   price
 }*/
 router.post('/product', passport.authenticate('jwt', { session: false }),function (req, res) {
-  upload(req, res, function (err) {
+  uploadProduct(req, res, function (err) {
     if(err){
       console.log(err);
       return res.end('err');

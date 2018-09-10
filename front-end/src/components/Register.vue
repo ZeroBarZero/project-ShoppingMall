@@ -11,11 +11,6 @@
                           <img src="https://placehold.it/128x128">
                       </figure>
                       <form>
-                        <div class="field">
-                            <div class="control">
-                                <input class="input is-large" type="text" placeholder="name" autofocus="">
-                            </div>
-                        </div>
                           <div class="field">
                               <div class="control">
                                   <input class="input is-large" type="email" placeholder="Your Email" autofocus="">
@@ -34,7 +29,29 @@
                               </div>
                               <span id="same"></span>
                           </div>
+                          <div class="field">
+                              <div class="control">
+                                  <input class="input is-large" type="text" placeholder="name" autofocus="">
+                              </div>
+                          </div>
+                          <div class="field">
+                              <div class="control">
+                                  <input class="input is" type="text" placeholder="전화번호를 입력해주세요. (ex. 01012345678)" autofocus="">
+                              </div>
+                          </div>
+                          <div class="field">
+                            <div class="control">
+                              <input class="input is" type="text" id="sample6_postcode" placeholder="우편번호">
+                              <input class="button is-fullwidth" type="button" v-on:click="sample6_execDaumPostcode" value="우편번호 찾기"><br>
+                            </div>
+                          </div>
 
+                          <div class="field">
+                            <div class="control">
+                              <input class="input is" type="text" id="sample6_address" placeholder="주소">
+                              <input class="input is" type="text" id="sample6_address2" placeholder="상세주소">
+                            </div>
+                          </div>
                           <button class="button is-block is-info is-large is-fullwidth">Sign up</button>
                       </form>
                   </div><p class="has-text-grey">
@@ -45,12 +62,53 @@
       </div>
   </section>
 </div>
-
 </template>
-
 <script>
-</script>
+export default {
+  data () {
+    return {
+      result: ''
+    }
+  },
+  methods: {
+    /* eslint-disable*/
+    sample6_execDaumPostcode: function () {
+      new daum.Postcode({
+        oncomplete: function(data) {
+          var fullAddr = ''
+          var extraAddr = ''
+          if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+            fullAddr = data.roadAddress
+          } else { // 사용자가 지번 주소를 선택했을 경우(J)
+            fullAddr = data.jibunAddress
+          }
 
+          // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+          if (data.userSelectedType === 'R') {
+            //법정동명이 있을 경우 추가한다.
+            if (data.bname !== '') {
+              extraAddr += data.bname
+            }
+            // 건물명이 있을 경우 추가한다.
+            if (data.buildingName !== '') {
+              extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName)
+            }
+            // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+            fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ')' : '')
+          }
+
+          // 우편번호와 주소 정보를 해당 필드에 넣는다.
+          document.getElementById('sample6_postcode').value = data.zonecode
+          document.getElementById('sample6_address').value = fullAddr
+
+          // 커서를 상세주소 필드로 이동한다.
+          document.getElementById('sample6_address2').focus()
+        }
+      }).open()
+    }
+  }
+}
+</script>
 <style>
 
 #register {
