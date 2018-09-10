@@ -30,7 +30,11 @@ module.exports = (passport) => {
         var cryptPassword = bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
         var userData = {
           email: username,
-          password: cryptPassword
+          password: cryptPassword,
+          name: req.body.name,
+          phoneNumber: req.body.phoneNumber,
+          address: req.body.address,
+          postcode: req.body.postcode
         };
         _user.create(userData).then((newUser, created) => {
           if(!newUser) return done(null, false);
