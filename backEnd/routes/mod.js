@@ -6,6 +6,7 @@ var passport = require('passport');
 var multer = require('multer');
 const SECRET = "s!2r#rcv[eT)";
 var router = express.Router();
+var fs = require('fs');
 var upload = multer({
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
@@ -39,7 +40,6 @@ router.get('/product', passport.authenticate('jwt', { session: false }), (req, r
   price
 }*/
 router.post('/product', passport.authenticate('jwt', { session: false }),function (req, res) {
-
   upload(req, res, function (err) {
     if(err){
       console.log(err);
@@ -60,28 +60,12 @@ router.post('/product', passport.authenticate('jwt', { session: false }),functio
         price: req.body.price,
         img: filesName
       }
-      console.log(productData)
       _product.create(productData).then((data) => {
       });
-      res.redirect('product');
     }
   })
 });
 
-
-router.post('/test1', function (req, res) {
-
-  upload(req, res, function (err) {
-    if(err){
-      console.log(err);
-      return res.end('err');
-    }
-    else{
-      console.log(req.body);
-      console.log(req.files);
-    }
-  })
-});
 
 /* update p
 {
@@ -114,7 +98,7 @@ router.put('/product/:id/u/category', passport.authenticate('jwt', {session: fal
   price
 }*/
 router.put('/product/:id/u/price', passport.authenticate('jwt', {session: false}), (req, res) => {
-  const {category} = req.body;
+  const {price} = req.body;
   _product.update({price:price}, {where: {id:req.params.id}}).then((result) => {
 
   }).catch(function(err) {
@@ -127,7 +111,7 @@ router.put('/product/:id/u/price', passport.authenticate('jwt', {session: false}
   stock
 }*/
 router.put('/product/:id/u/stock', passport.authenticate('jwt', {session: false}), (req, res) => {
-  const {category} = req.body;
+  const {stock} = req.body;
   _product.update({stock:stock}, {where: {id:req.params.id}}).then((result) => {
 
   }).catch(function(err) {
@@ -135,43 +119,54 @@ router.put('/product/:id/u/stock', passport.authenticate('jwt', {session: false}
   });
 });
 
+/* update p
+{
+  category
+}*/
+router.put('/product/:id/u/img', passport.authenticate('jwt', {session: false}), (req, res) => {
+  upload(req, res, function (err) {
+    if(err){
+      console.log(err);
+      return res.end('err');
+    }
+    else{
+      var filesName = ''
+      for (var i = 0; i < req.files.length; i++){
+        filesName += req.files[i].originalname
+        if (i < req.files.length-1){
+          filesName += ','
+        }
+      }
+
+      _product.update({img: filesName}, {where: {id:req.params.id}}).then((result) => {
+
+      }).catch(function(err) {
+
+      });
+    }
+  })
+});
+
+
 /* delete p */
 router.delete('/product/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
-  _product.destroy({where: {id:req.params.id}}).then((result) => {
-
-  }).catch(function(err) {
-
-  });
-  res.redirect('product');
+  _product.findAll({where: {id:req.params.id}}).then(result => {
+    var strArr = result[0].img.split(',');
+    for (var i = 0; i < strArr.length; i++){
+      if(fs.existsSync('./public/images/products/'+strArr[i])){
+        fs.unlinkSync('./public/images/products/'+strArr[i])
+      }
+    }
+    _product.destroy({where: {id:req.params.id}}).then((result) => {
+    }).catch(function(err) {
+    });
+  })
 });
 
 router.get('/project', passport.authenticate('jwt', { session: false }), (req, res) =>{
   _project.findAll().then((data) => {
     res.send(data);
   });
-});
-
-router.post('/project', passport.authenticate('jwt', { session: false }), (req, res) =>{
-  const {title, contents} = req.body;
-  var files = req.files;
-  var filesName = "";
-
-  for (var i = 0; i < files.length; i++){
-    filesName += files[i].originalname
-    if (i < files.length){
-      filesName += ','
-    }
-  }
-
-  var projectData = {
-    title: title,
-    contents: contents,
-    img: filesName
-  }
-  _project.create(projectData).then((data) => {
-
-  });
-  res.redirect('product');
 });
 
 module.exports = router;
