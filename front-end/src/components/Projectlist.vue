@@ -1,22 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
-<div class="btnswrap">
-  <div class="controls isotype">
-      <button type="button" class="control" data-filter="all">All</button>
-      <button type="button" class="control" data-toggle=".tour">#투어</button>
-      <button type="button" class="control" data-toggle=".design">#디자인</button>
-      <button type="button" class="control" data-toggle=".map">#지도</button>
-      <button type="button" class="control" data-toggle=".edu">#교육</button>
-      <button type="button" class="control" data-toggle=".pre">#강의</button>
-      <button type="button" class="control" data-toggle=".local">#지역</button>
-      <button type="button" class="control" data-toggle=".city">#도시재생</button>
-      <button type="button" class="control" data-toggle=".fest">#축제</button>
-      <button type="button" class="control" data-toggle=".evt">#행사</button>
-  </div>
-</div>
-=======
-
   <div class="controls container">
       <button type="button" class="control" data-filter="all">All</button>
       <button type="button" class="control" data-filter=".tour">#투어</button>
@@ -29,7 +12,6 @@
       <button type="button" class="control" data-filter=".fest">#축제</button>
       <button type="button" class="control" data-filter=".evt">#행사</button>
   </div>
->>>>>>> 58fed4553d2dbb63195fde09c141fba0ee3280d3
   <div class="container">
     <div class="profile-items">
       <div class="columns is-multiline is-mobile isotype">
@@ -43,19 +25,7 @@
         </template>
 
         <template  v-for="(n, index) in 3">
-<<<<<<< HEAD
           <div v-bind:key="index" class="mix column is-one-third">
-=======
-          <div v-bind:key="index" class="column is-one-third mix tour">
-            <div class="image is-1by1" @click="openModal(item)">
-              <img src="https://via.placeholder.com/256x256"/>
-            </div>
-          </div>
-        </template>
-
-        <template  v-for="(n, index) in 3">
-          <div v-bind:key="index" class="column is-one-third mix">
->>>>>>> 58fed4553d2dbb63195fde09c141fba0ee3280d3
             <div class="image is-1by1" @click="openModal(item)">
               <img src="https://via.placeholder.com/256x256"/>
             </div>
@@ -83,15 +53,9 @@
                 <h2 class="subtitle">
                   <small>
                     기간: {{ modalData.owner.name }}
-<<<<<<< HEAD
                     <br />
                     지역: {{ modalData.itemId }}
                     <br />
-=======
-                    <br />
-                    지역: {{ modalData.itemId }}
-                    <br />
->>>>>>> 58fed4553d2dbb63195fde09c141fba0ee3280d3
                     협력기관: {{ modalData.itemId }}
                     <br />
                     내용및 관련 url: {{ modalData.itemId }}
@@ -155,7 +119,6 @@ export default {
   created() {
   },
   mounted() {
-<<<<<<< HEAD
     var containerEl = document.querySelector('.isotype');
     var mixer = mixitup(containerEl);
     var mixer = mixitup(containerEl, {
@@ -168,10 +131,6 @@ export default {
           }
 
     });
-=======
-    var containerEl = document.querySelector('.container');
-    var mixer = mixitup(containerEl);
->>>>>>> 58fed4553d2dbb63195fde09c141fba0ee3280d3
   }
 };
 </script>
@@ -208,11 +167,8 @@ export default {
     padding: 1rem;
     background: #333;
     font-size: 2rem;
-<<<<<<< HEAD
     text-align: center;
     box-sizing: content-box;
-=======
->>>>>>> 58fed4553d2dbb63195fde09c141fba0ee3280d3
 }
 
 .control {
@@ -227,10 +183,7 @@ export default {
     transition: background 150ms;
     text-decoration: none;
     text-align: center;
-<<<<<<< HEAD
     border : none;
-=======
->>>>>>> 58fed4553d2dbb63195fde09c141fba0ee3280d3
   }
 
 .control:hover {
