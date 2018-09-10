@@ -3,7 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '@/components/Home'
 import Login from '@/components/Login'
 import Logout from '@/components/Logout'
-import Admin from '@/components/Admin'
+import Admin from '@/components/Admins/Admin'
+import Dashboard from '@/components/Admins/Dashboard'
+import CURD from '@/components/Admins/CURD'
 import Register from '@/components/Register'
 import Projectlist from '@/components/Projectlist'
 import Storeitem from '@/components/Storeitem'
@@ -12,6 +14,7 @@ import Seoullist from '@/components/Seoullist'
 import Seoulitem from '@/components/Seoulitem'
 import Order from '@/components/Order'
 import OrderComplete from '@/components/OrderComplete'
+/* eslint-disable */
 
 Vue.use(VueRouter)
 
@@ -38,7 +41,11 @@ export default new VueRouter({
     {
       path: '/admin',
       name: 'Admin',
-      component: Admin
+      component: Admin,
+      children : [
+        { path: 'dashboard', component: Dashboard },
+        { path: 'curd', component: CURD }
+      ]
     },
     {
       path: '/register',

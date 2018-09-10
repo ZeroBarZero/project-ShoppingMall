@@ -1,40 +1,5 @@
 <template>
-
   <div id="admin">
-
-      <!-- START NAV -->
-      <nav class="navbar is-white">
-          <div class="container">
-              <div class="navbar-brand">
-                  <a class="navbar-item brand-text" href="../">
-            Bulma Admin
-          </a>
-                  <div class="navbar-burger burger" data-target="navMenu">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                  </div>
-              </div>
-              <div id="navMenu" class="navbar-menu">
-                  <div class="navbar-start">
-                      <a class="navbar-item" href="admin.html">
-              Home
-            </a>
-                      <a class="navbar-item" href="admin.html">
-              Orders
-            </a>
-                      <a class="navbar-item" href="admin.html">
-              Payments
-            </a>
-                      <a class="navbar-item" href="admin.html">
-              Exceptions
-            </a>
-                  </div>
-
-              </div>
-          </div>
-      </nav>
-      <!-- END NAV -->
       <div class="container">
           <div class="columns">
               <div class="column is-3">
@@ -47,41 +12,20 @@
                           <li><a>Customers</a></li>
                       </ul>
                       <p class="menu-label">
-                          Administration
+                          board "CURD"
                       </p>
                       <ul class="menu-list">
-                          <li><a>Team Settings</a></li>
-                          <li>
-                              <a>Manage Your Team</a>
-                              <ul>
-                                  <li><a>Members</a></li>
-                                  <li><a>Plugins</a></li>
-                                  <li><a>Add a member</a></li>
-                              </ul>
-                          </li>
-                          <li><a>Invitations</a></li>
-                          <li><a>Cloud Storage Environment Settings</a></li>
-                          <li><a>Authentication</a></li>
+                          <li><router-link :to="{ name: '', params: {} }">curd Form</router-link>
+                          <li><a>Store</a></li>
+                          <li><a>Project</a></li>
+                          <li><a>Seoul</a></li>
                       </ul>
                       <p class="menu-label">
-                          Transactions
+                          payment IMPORT
                       </p>
-                      <ul class="menu-list">
-                          <li><a>Payments</a></li>
-                          <li><a>Transfers</a></li>
-                          <li><a>Balance</a></li>
-                      </ul>
                   </aside>
               </div>
               <div class="column is-9">
-                  <nav class="breadcrumb" aria-label="breadcrumbs">
-                      <ul>
-                          <li><a href="../">Bulma</a></li>
-                          <li><a href="../">Templates</a></li>
-                          <li><a href="../">Examples</a></li>
-                          <li class="is-active"><a href="#" aria-current="page">Admin</a></li>
-                      </ul>
-                  </nav>
                   <section class="hero is-info welcome is-small">
                       <div class="hero-body">
                           <div class="container">
@@ -130,10 +74,10 @@
                                       Events
                                   </p>
                                   <a href="#" class="card-header-icon" aria-label="more options">
-                    <span class="icon">
-                      <i class="fa fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                  </a>
+                                    <span class="icon">
+                                      <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </a>
                               </header>
                               <div class="card-table">
                                   <div class="content">
@@ -267,6 +211,7 @@ export default {
   line-height: 1.5;
   height: 100%;
   background: #ECF0F3;
+  padding-top: 20px;
 }
 #admin nav.navbar {
   border-top: 4px solid #276cda;
