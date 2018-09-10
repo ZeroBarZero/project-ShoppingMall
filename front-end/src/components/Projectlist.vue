@@ -1,6 +1,5 @@
 <template>
   <div>
-
   <div class="controls container">
       <button type="button" class="control" data-filter="all">All</button>
       <button type="button" class="control" data-filter=".tour">#투어</button>
@@ -15,10 +14,10 @@
   </div>
   <div class="container">
     <div class="profile-items">
-      <div class="columns is-multiline is-mobile">
+      <div class="columns is-multiline is-mobile isotype">
 
         <template  v-for="(n, index) in 3">
-          <div v-bind:key="index" class="column is-one-third mix tour">
+          <div v-bind:key="index" class="mix tour column is-one-third">
             <div class="image is-1by1" @click="openModal(item)">
               <img src="https://via.placeholder.com/256x256"/>
             </div>
@@ -26,7 +25,7 @@
         </template>
 
         <template  v-for="(n, index) in 3">
-          <div v-bind:key="index" class="column is-one-third mix">
+          <div v-bind:key="index" class="mix column is-one-third">
             <div class="image is-1by1" @click="openModal(item)">
               <img src="https://via.placeholder.com/256x256"/>
             </div>
@@ -120,8 +119,18 @@ export default {
   created() {
   },
   mounted() {
-    var containerEl = document.querySelector('.container');
+    var containerEl = document.querySelector('.isotype');
     var mixer = mixitup(containerEl);
+    var mixer = mixitup(containerEl, {
+          load: {
+                  filter: '.category-2',
+                  sort: 'published-date:desc'
+                },
+          controls: {
+              toggleDefault: 'none'
+          }
+
+    });
   }
 };
 </script>
@@ -158,6 +167,8 @@ export default {
     padding: 1rem;
     background: #333;
     font-size: 2rem;
+    text-align: center;
+    box-sizing: content-box;
 }
 
 .control {
@@ -172,6 +183,7 @@ export default {
     transition: background 150ms;
     text-decoration: none;
     text-align: center;
+    border : none;
   }
 
 .control:hover {
