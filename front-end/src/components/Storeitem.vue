@@ -16,8 +16,8 @@
                     <br>
                     <br>
                     <p class='level'>
-                        <router-link to="/order" class="button is-large is-primary level-item has-text-centered">Buy Now</router-link>
-                          <router-link to="/order" class="button is-large is-primary level-item has-text-centered">Add to cart</router-link>
+                        <router-link to="/order" class="button is-medium is-primary level-item has-text-centered">Buy Now</router-link>
+                        <router-link to="/order" class="button is-medium is-primary level-item has-text-centered">Add to cart</router-link>
                     </p>
                     <br>
                 </div>

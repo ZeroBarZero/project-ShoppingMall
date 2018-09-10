@@ -48,7 +48,6 @@
 * {
   box-sizing: border-box;
 }
-
 $color_white: #fff;
 $color_prime: #5ad67d;
 $color_grey: #e2e2e2;
