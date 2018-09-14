@@ -10,50 +10,47 @@
                       <figure class="avatar">
                           <img src="https://placehold.it/128x128">
                       </figure>
-                      <form>
+                      <div>
                           <div class="field">
                               <div class="control">
-                                  <input class="input is-large" type="email" placeholder="Your Email" autofocus="">
-                              </div>
-                          </div>
-
-                          <div class="field">
-                              <div class="control">
-                                  <input id="pw" class="input is-large" type="password" placeholder="Your Password" onchange="issame (this)">
-                              </div>
-                          </div>
-
-                          <div class="field">
-                              <div class="control">
-                                  <input id="pwcheck" class="input is-large" type="password" placeholder="Check Password" onchange="issame (this)">
-                              </div>
-                              <span id="same"></span>
-                          </div>
-                          <div class="field">
-                              <div class="control">
-                                  <input class="input is-large" type="text" placeholder="name" autofocus="">
+                                  <input class="input is-large" type="email" v-model="email" placeholder="Your Email" autofocus="">
                               </div>
                           </div>
                           <div class="field">
                               <div class="control">
-                                  <input class="input is" type="text" placeholder="전화번호를 입력해주세요. (ex. 01012345678)" autofocus="">
+                                  <input id="pw" class="input is-large" type="password" v-model="password" placeholder="Your Password">
+                              </div>
+                          </div>
+                          <div class="field">
+                              <div class="control">
+                                  <input id="pwcheck" class="input is-large" type="password" v-model="pwcheck" placeholder="Check Password">
+                              </div>
+                          </div>
+                          <div class="field">
+                              <div class="control">
+                                  <input class="input is-large" type="text" v-model="name" placeholder="name" autofocus="">
+                              </div>
+                          </div>
+                          <div class="field">
+                              <div class="control">
+                                  <input class="input is" type="text" v-model="phoneNumber" placeholder="전화번호를 입력해주세요. (ex. 01012345678)" autofocus="">
                               </div>
                           </div>
                           <div class="field">
                             <div class="control">
-                              <input class="input is" type="text" id="sample6_postcode" placeholder="우편번호">
+                              <input class="input is" type="text" v-model="postcode" id="sample6_postcode" placeholder="우편번호">
                               <input class="button is-fullwidth" type="button" v-on:click="sample6_execDaumPostcode" value="우편번호 찾기"><br>
                             </div>
                           </div>
 
                           <div class="field">
                             <div class="control">
-                              <input class="input is" type="text" id="sample6_address" placeholder="주소">
-                              <input class="input is" type="text" id="sample6_address2" placeholder="상세주소">
+                              <input class="input is" type="text" v-model="addr1" id="sample6_address" placeholder="주소">
+                              <input class="input is" type="text" v-model="addr2" id="sample6_address2" placeholder="상세주소">
                             </div>
                           </div>
-                          <button class="button is-block is-info is-large is-fullwidth">Sign up</button>
-                      </form>
+                          <button class="button is-block is-info is-large is-fullwidth" v-on:click="sendForm">Sign up</button>
+                      </div>
                   </div><p class="has-text-grey">
                       <router-link to="/login">Already Member?</router-link>
                   </p>
@@ -67,7 +64,14 @@
 export default {
   data () {
     return {
-      result: ''
+      email: '',
+      password: '',
+      pwcheck: '',
+      name: '',
+      phoneNumber: '',
+      postcode: '',
+      addr1: '',
+      addr2: ''
     }
   },
   methods: {
@@ -105,6 +109,25 @@ export default {
           document.getElementById('sample6_address2').focus()
         }
       }).open()
+    },
+    sendForm: function () {
+        if (this.password!==this.pwcheck) {
+          alert("비밀번호가 틀립니다. :>")
+        }
+        else {
+          var addr = this.addr1 + this.addr2
+          var formData = {
+            email: this.email,
+            password: this.password,
+            name: this.name,
+            phoneNumber: this.phoneNumber,
+            postcode: this.postcode,
+            address: addr
+          }
+          this.$http.post('/api/user/signup', formData).then(response => {
+            alert(response)
+          })
+        }
     }
   }
 }
