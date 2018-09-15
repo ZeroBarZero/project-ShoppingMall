@@ -1,20 +1,27 @@
 <template>
-  <div>
-    <b-form-input v-model="text1"
+  <form>
+    <input v-model="text1"
                   type="text"
-                  placeholder="Enter your name"></b-form-input>
+                  placeholder="Enter your name"/>
     <p>Value: {{ text1 }}</p>
-    <b-form-input v-model="text2"
+    <input v-model="text2"
                   type="text"
-                  placeholder="Enter your password"></b-form-input>
+                  placeholder="Enter your password"/>
     <p>Value: {{ text2 }}</p>
-    <b-form-file v-model="files" :state="Boolean(files)" multiple placeholder="Choose a file..."></b-form-file>
-    <b-button variant="warning" @click="test">실험중</b-button>
-    <b-button variant="danger" @click="test2">실험중2</b-button>
-    <b-button variant="success" @click="test3">실험중3</b-button>
-  </div>
+    <input type="file" ref="files" v-on:change="handleFilesUpload()" multiple placeholder="Choose a file..."/>
+    <button variant="warning" @click="test">실험중</button>
+    <button variant="danger" @click="test2">실험중2</button>
+    <button variant="success" @click="test3">실험중3</button>
+
+    <div class="large-12 medium-12 small-12 cell">
+      <div v-for="(file, key) in files" class="file-listing">{{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">Remove</span></div>
+    </div>
+  </form>
+
+
 </template>
 <script>
+/* eslint-disable */
 export default {
   data () {
     return {
@@ -52,6 +59,18 @@ export default {
     test3 () {
       this.$http.delete('/api/mod/product/11').then((response) => {
       })
+    },
+    handleFilesUpload(){
+        let uploadedFiles = this.$refs.files.files;
+        /*
+          Adds the uploaded file to the files array
+        */
+        for( var i = 0; i < uploadedFiles.length; i++ ){
+          this.files.push( uploadedFiles[i] );
+        }
+    },
+    removeFile( key ){
+        this.files.splice( key, 1 );
     }
   }
 }

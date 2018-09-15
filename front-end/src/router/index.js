@@ -43,7 +43,7 @@ export default new VueRouter({
       name: 'Admin',
       component: Admin,
       children : [
-        { path: 'dashboard', component: Dashboard },
+        { path: '/admin', component: Dashboard },
         { path: 'curd', component: CURD }
       ]
     },
