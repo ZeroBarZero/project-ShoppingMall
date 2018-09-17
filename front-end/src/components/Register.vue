@@ -36,19 +36,10 @@
                                   <input class="input is" type="text" v-model="phoneNumber" placeholder="전화번호를 입력해주세요. (ex. 01012345678)" autofocus="">
                               </div>
                           </div>
-                          <div class="field">
-                            <div class="control">
-                              <input class="input is" type="text" v-model="postcode" id="sample6_postcode" placeholder="우편번호">
-                              <input class="button is-fullwidth" type="button" v-on:click="sample6_execDaumPostcode" value="우편번호 찾기"><br>
-                            </div>
-                          </div>
-
-                          <div class="field">
-                            <div class="control">
-                              <input class="input is" type="text" v-model="addr1" id="sample6_address" placeholder="주소">
-                              <input class="input is" type="text" v-model="addr2" id="sample6_address2" placeholder="상세주소">
-                            </div>
-                          </div>
+                              <input class="input is" type="text" id="sample6_postcode" placeholder="우편번호">
+                              <input class="button is-block is-danger is-fullwidth" type="button" v-on:click="sample6_execDaumPostcode" value="우편번호 찾기"><br>
+                              <input class="input is" type="text" id="sample6_address" placeholder="주소">
+                              <input class="input is" type="text" id="sample6_address2" placeholder="상세주소">
                           <button class="button is-block is-info is-large is-fullwidth" v-on:click="sendForm">Sign up</button>
                       </div>
                   </div><p class="has-text-grey">
@@ -105,12 +96,15 @@ export default {
           document.getElementById('sample6_postcode').value = data.zonecode
           document.getElementById('sample6_address').value = fullAddr
 
-          // 커서를 상세주소 필드로 이동한다.
-          document.getElementById('sample6_address2').focus()
+          document.getElementById('sample6_address2').focus();
         }
       }).open()
     },
     sendForm: function () {
+      this.postcode = document.getElementById('sample6_postcode').value
+      this.addr1 = document.getElementById('sample6_address').value
+      this.addr2 = document.getElementById('sample6_address2').value
+
         if (this.password!==this.pwcheck) {
           alert("비밀번호가 틀립니다. :>")
         }
