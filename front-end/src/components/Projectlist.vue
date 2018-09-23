@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="projectlist">
   <div class="controls container">
       <button type="button" class="control" data-filter="all">All</button>
       <button type="button" class="control" data-filter=".tour">#투어</button>
@@ -162,7 +162,7 @@ export default {
   width: 30%;
 }
 
-.controls {
+#projectlist .controls {
     margin: auto;
     padding: 1rem;
     background: #333;
@@ -171,7 +171,7 @@ export default {
     box-sizing: content-box;
 }
 
-.control {
+#projectlist .control {
     position: relative;
     display: inline-block;
     width: 4rem;
@@ -186,7 +186,7 @@ export default {
     border : none;
   }
 
-.control:hover {
+#projectlist .control:hover {
     background: #3f3f3f;
 }
 /*.control[data-filter]:after {

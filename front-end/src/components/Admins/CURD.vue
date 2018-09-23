@@ -1,4 +1,24 @@
 <template>
+<<<<<<< HEAD
+  <form>
+    <input v-model="text1"
+                  type="text"
+                  placeholder="Enter your name"/>
+    <p>Value: {{ text1 }}</p>
+    <input v-model="text2"
+                  type="text"
+                  placeholder="Enter your password"/>
+    <p>Value: {{ text2 }}</p>
+    <input type="file" ref="files" v-on:change="handleFilesUpload()" multiple placeholder="Choose a file..."/>
+    <button variant="warning" @click="test">실험중</button>
+    <button variant="danger" @click="test2">실험중2</button>
+    <button variant="success" @click="test3">실험중3</button>
+
+    <div class="large-12 medium-12 small-12 cell">
+      <div v-for="(file, key) in files" v-bind:key="file.name" class="file-listing">{{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">Remove</span></div>
+    </div>
+  </form>
+=======
   <div id="admin">
       <div class="container">
           <div class="columns">
@@ -31,6 +51,7 @@
       </div>
 
   </div>
+>>>>>>> f2138b23fdc35bfd5618a0872879dd5bb3c4676f
 </template>
 
 <script>
