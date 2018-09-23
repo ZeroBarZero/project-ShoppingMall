@@ -7,9 +7,9 @@
                   <h3 class="title has-text-grey">Login</h3>
                   <p class="subtitle has-text-grey">Please login to proceed.</p>
                   <div class="box">
+                    <p class="has-text-grey">plz write your email</p>
                       <form>
                         <div class="control">
-                            <label>회원가입때 기입한 이메일을 입력해주세요. :)</label>
                         </div>
                           <div class="field">
                             <div class="control">
@@ -43,7 +43,7 @@ export default {
   methods: {
     onSubmit : function (evt) {
       evt.preventDefault()
-      this.$http.post('/api/user/login', this.form).then((response) => {
+      this.$http.post('/api/user/emailVerification', this.form).then((response) => {
         alert(JSON.stringify(response.data))
       })
     }

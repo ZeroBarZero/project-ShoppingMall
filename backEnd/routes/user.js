@@ -4,7 +4,8 @@ var bCrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var models = require('../models');
 var nodemailer = require('nodemailer');
-
+var rs = require('randomstring');
+var smtpPool = require('nodemailer-smtp-pool')
 var _user = models.user;
 const SECRET = "s!2r#rcv[eT)";
 
@@ -58,31 +59,45 @@ router.get('/logout', (req, res) => {
   res.send('done.');
 });
 
-router.post('/emailVerfication',passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/emailVerification', (req, res) => {
   let email = req.body.email;
   _user.findOne({where:{email:email}}).then(user => {
-    let smtpTransport = nodemailer.createTransport(smtpPool({
-      service: 'Gmail',
-      host: 'localhost',
-      port: '465',
-      tls: {
-        rejectUnauthorize: false
-      },
-      auth: {
-        user:'',
-        pass: ''
-      },
-      maxConnection: 5,
-      maxMessages: 10
-    }));
+    if (user){
+      let smtpTransport = nodemailer.createTransport(smtpPool({
+        service: 'Gmail',
+        host: 'localhost',
+        port: '465',
+        tls: {
+          rejectUnauthorize: false
+        },
+        auth: {
+          user:'ggamangk@gmail.com',
+          pass: '!dongmin15@'
+        },
+        maxConnection: 5,
+        maxMessages: 10
+      }));
+      var newPassword = rs.generate();
 
-    let mailOptions = {
-      from: 'noReply <ifmoon.io@gmail.com>',
-      to: email,
-      subject: '헬로서울 임시 비밀번호입니다.',
-      text: '링크를 클릭해주세요.'
-    };
+      let mailOptions = {
+        from: 'noReply <ifmoon.io@gmail.com>',
+        to: email,
+        subject: '헬로서울 임시 비밀번호입니다.',
+        text: '임시 비밀번호입니다. ' + newPassword
+      };
+      smtpTransport.sendMail(mailOptions, function(error, info) {
+          if(error) console.log(error);
+          else console.log('Email sent: ' + info.response);
+      });
+
+      crpytPassword = bCrypt.hashSync(newPassword, bCrypt.genSaltSync(8), null);
+      _user.update({password: crpytPassword},{where:{email:email}}).then(res => {})
+    }
   })
+  else{
+  
+  }
+
 });
 
 module.exports = router;
