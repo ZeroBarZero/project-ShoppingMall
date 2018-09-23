@@ -33,6 +33,10 @@ module.exports = function(sequelize, Sequelize) {
         img: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        tag: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
 
     },

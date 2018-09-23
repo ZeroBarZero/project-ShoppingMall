@@ -36,19 +36,10 @@
                                   <input class="input is" type="text" v-model="phoneNumber" placeholder="전화번호를 입력해주세요. (ex. 01012345678)" autofocus="">
                               </div>
                           </div>
-                          <div class="field">
-                            <div class="control">
-                              <input class="input is" type="text" v-model="postcode" id="sample6_postcode" placeholder="우편번호">
-                              <input class="button is-fullwidth" type="button" v-on:click="sample6_execDaumPostcode" value="우편번호 찾기"><br>
-                            </div>
-                          </div>
-
-                          <div class="field">
-                            <div class="control">
-                              <input class="input is" type="text" v-model="addr1" id="sample6_address" placeholder="주소">
-                              <input class="input is" type="text" v-model="addr2" id="sample6_address2" placeholder="상세주소">
-                            </div>
-                          </div>
+                              <input class="input is" type="text" id="sample6_postcode" placeholder="우편번호">
+                              <input class="button is-block is-danger is-fullwidth" type="button" v-on:click="sample6_execDaumPostcode" value="우편번호 찾기"><br>
+                              <input class="input is" type="text" id="sample6_address" placeholder="주소">
+                              <input class="input is" type="text" id="sample6_address2" placeholder="상세주소">
                           <button class="button is-block is-info is-large is-fullwidth" v-on:click="sendForm">Sign up</button>
                       </div>
                   </div><p class="has-text-grey">
@@ -105,29 +96,77 @@ export default {
           document.getElementById('sample6_postcode').value = data.zonecode
           document.getElementById('sample6_address').value = fullAddr
 
-          // 커서를 상세주소 필드로 이동한다.
-          document.getElementById('sample6_address2').focus()
+          document.getElementById('sample6_address2').focus();
         }
       }).open()
     },
     sendForm: function () {
-        if (this.password!==this.pwcheck) {
-          alert("비밀번호가 틀립니다. :>")
+      this.postcode = document.getElementById('sample6_postcode').value
+      this.addr1 = document.getElementById('sample6_address').value
+      this.addr2 = document.getElementById('sample6_address2').value
+
+      var warnString = '다음 항목을 확인해주세요.\n\n'
+      var err = false
+
+      if (this.email==='') {
+        warnString += '이메일 비어있음\n'
+          err = true
+      }
+      else {
+        var emailVal = this.email
+        var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+        if (!(emailVal.match(regExp) != null)) {
+          warnString += '이메일 형식 올바르지 않음\n'
+          err = true
         }
-        else {
-          var addr = this.addr1 + this.addr2
-          var formData = {
-            email: this.email,
-            password: this.password,
-            name: this.name,
-            phoneNumber: this.phoneNumber,
-            postcode: this.postcode,
-            address: addr
-          }
-          this.$http.post('/api/user/signup', formData).then(response => {
-            alert(response)
-          })
+      }
+      if (this.password==='') {
+        warnString += '비밀번호 비어있음\n'
+        err = true
+      }
+      if (this.pwcheck === '') {
+        warnString += '비밀번호 확인 비어있음\n'
+        err = true
+      }
+      if (this.name==='') {
+        warnString += '이름 비어있음\n'
+        err = true
+      }
+      if (this.phoneNumber === '') {
+        warnString += '전화번호 비어있음\n'
+        err = true
+      }
+      if (this.password!==this.pwcheck) {
+        warnString += '비밀번호와 비밀번호 확인이 일치하지 않음\n'
+        err = true
+      }
+      if (this.postcode === '') {
+        warnString += '우편번호가 비어있음\n'
+        err = true
+      }
+      if (this.addr1 === '' || this.addr2 === ''){
+        warnString += '주소가 비어있음'
+        err = true
+      }
+
+
+      if (err) {
+        alert(warnString)
+      }
+      else {
+        var addr = this.addr1 + this.addr2
+        var formData = {
+          email: this.email,
+          password: this.password,
+          name: this.name,
+          phoneNumber: this.phoneNumber,
+          postcode: this.postcode,
+          address: addr
         }
+        this.$http.post('/api/user/signup', formData).then(response => {
+          alert(response)
+        })
+      }
     }
   }
 }
