@@ -1,6 +1,6 @@
 module.exports = function(sequelize, Sequelize) {
 
-    var project = sequelize.define('project', {
+    var jornal = sequelize.define('jornal', {
 
         id: {
             primaryKey: true,
@@ -15,25 +15,17 @@ module.exports = function(sequelize, Sequelize) {
             notEmpty: true,
             unique: true,
         },
-        period: {
+        subtitle: {
           type: Sequelize.STRING,
           allowNull: false
         },
-        location: {
-          type: Sequelize.STRING,
-          allowNull: false
-        },
-        coCo: {
+        author: {
           type: Sequelize.STRING,
           allowNull: false
         },
         contents: {
             type: Sequelize.STRING,
             allowNull: false
-        },
-        url: {
-          type: Sequelize.STRING,
-          allowNull: false
         },
         tag: {
           type: Sequelize.STRING,
@@ -47,9 +39,9 @@ module.exports = function(sequelize, Sequelize) {
     },
     {
       timestamps: true,
-      tableName: 'project'
+      tableName: 'jornal'
     });
 
-    return project;
+    return jornal;
 
 }
