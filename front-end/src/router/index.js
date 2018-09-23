@@ -15,11 +15,7 @@ import Seoullist from '@/components/Seoullist'
 import Seoulitem from '@/components/Seoulitem'
 import Order from '@/components/Order'
 import OrderComplete from '@/components/OrderComplete'
-<<<<<<< HEAD
 import Forgotme from '@/components/Forgotme'
-=======
-
->>>>>>> dfcec02c757d8ecf7d5b8c5b277263686bfca0c3
 /* eslint-disable */
 
 Vue.use(VueRouter)
