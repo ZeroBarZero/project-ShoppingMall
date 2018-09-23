@@ -6,6 +6,7 @@ import Logout from '@/components/Logout'
 import Admin from '@/components/Admins/Admin'
 import Dashboard from '@/components/Admins/Dashboard'
 import CURD from '@/components/Admins/CURD'
+import seoul from '@/components/Admins/seoul'
 import Register from '@/components/Register'
 import Projectlist from '@/components/Projectlist'
 import Storeitem from '@/components/Storeitem'
@@ -14,6 +15,7 @@ import Seoullist from '@/components/Seoullist'
 import Seoulitem from '@/components/Seoulitem'
 import Order from '@/components/Order'
 import OrderComplete from '@/components/OrderComplete'
+
 /* eslint-disable */
 
 Vue.use(VueRouter)
@@ -44,7 +46,8 @@ export default new VueRouter({
       component: Admin,
       children : [
         { path: '/admin', component: Dashboard },
-        { path: 'curd', component: CURD }
+        { path: 'curd', component: CURD },
+        { path: 'seoul', component: seoul }
       ]
     },
     {

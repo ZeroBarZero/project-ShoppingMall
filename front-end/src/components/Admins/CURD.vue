@@ -14,11 +14,9 @@
     <button variant="success" @click="test3">실험중3</button>
 
     <div class="large-12 medium-12 small-12 cell">
-      <div v-for="(file, key) in files" class="file-listing">{{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">Remove</span></div>
+      <div v-for="(file, key) in files" v-bind:key="file.name" class="file-listing">{{ file.name }} <span class="remove-file" v-on:click="removeFile( key )">Remove</span></div>
     </div>
   </form>
-
-
 </template>
 <script>
 /* eslint-disable */

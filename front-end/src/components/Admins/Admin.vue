@@ -14,10 +14,10 @@
                           board "CURD"
                       </p>
                       <ul class="menu-list">
-                          <li><router-link to="/admin/curd">curd Form</router-link>
+                          <li><router-link to="/admin/curd">curd Form</router-link></li>
                           <li><a>Store</a></li>
                           <li><a>Project</a></li>
-                          <li><a>Seoul</a></li>
+                          <li><router-link to="/admin/seoul">Seoul</router-link></li>
                       </ul>
                       <p class="menu-label">
                           payment IMPORT
