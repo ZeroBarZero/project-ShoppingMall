@@ -105,23 +105,68 @@ export default {
       this.addr1 = document.getElementById('sample6_address').value
       this.addr2 = document.getElementById('sample6_address2').value
 
-        if (this.password!==this.pwcheck) {
-          alert("비밀번호가 틀립니다. :>")
+      var warnString = '다음 항목을 확인해주세요.\n\n'
+      var err = false
+
+      if (this.email==='') {
+        warnString += '이메일 비어있음\n'
+          err = true
+      }
+      else {
+        var emailVal = this.email
+        var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+        if (!(emailVal.match(regExp) != null)) {
+          warnString += '이메일 형식 올바르지 않음\n'
+          err = true
         }
-        else {
-          var addr = this.addr1 + this.addr2
-          var formData = {
-            email: this.email,
-            password: this.password,
-            name: this.name,
-            phoneNumber: this.phoneNumber,
-            postcode: this.postcode,
-            address: addr
-          }
-          this.$http.post('/api/user/signup', formData).then(response => {
-            alert(response)
-          })
+      }
+      if (this.password==='') {
+        warnString += '비밀번호 비어있음\n'
+        err = true
+      }
+      if (this.pwcheck === '') {
+        warnString += '비밀번호 확인 비어있음\n'
+        err = true
+      }
+      if (this.name==='') {
+        warnString += '이름 비어있음\n'
+        err = true
+      }
+      if (this.phoneNumber === '') {
+        warnString += '전화번호 비어있음\n'
+        err = true
+      }
+      if (this.password!==this.pwcheck) {
+        warnString += '비밀번호와 비밀번호 확인이 일치하지 않음\n'
+        err = true
+      }
+      if (this.postcode === '') {
+        warnString += '우편번호가 비어있음\n'
+        err = true
+      }
+      if (this.addr1 === '' || this.addr2 === ''){
+        warnString += '주소가 비어있음'
+        err = true
+      }
+
+
+      if (err) {
+        alert(warnString)
+      }
+      else {
+        var addr = this.addr1 + this.addr2
+        var formData = {
+          email: this.email,
+          password: this.password,
+          name: this.name,
+          phoneNumber: this.phoneNumber,
+          postcode: this.postcode,
+          address: addr
         }
+        this.$http.post('/api/user/signup', formData).then(response => {
+          alert(response)
+        })
+      }
     }
   }
 }
