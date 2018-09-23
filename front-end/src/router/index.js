@@ -14,6 +14,7 @@ import Seoullist from '@/components/Seoullist'
 import Seoulitem from '@/components/Seoulitem'
 import Order from '@/components/Order'
 import OrderComplete from '@/components/OrderComplete'
+import Forgotme from '@/components/Forgotme'
 /* eslint-disable */
 
 Vue.use(VueRouter)
@@ -26,7 +27,6 @@ export default new VueRouter({
       alias: '/',
       name: 'Home',
       component: Home
-
     },
     {
       path: '/login',
@@ -86,6 +86,11 @@ export default new VueRouter({
       path: '/ordercomplete',
       name: 'OrderComplete',
       component: OrderComplete
+    },
+    {
+      path: '/forgotme',
+      name: 'Forgotme',
+      component: Forgotme
     }
   ],
   scrollBehavior (to, from, savedPosition) {

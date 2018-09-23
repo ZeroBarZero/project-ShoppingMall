@@ -16,7 +16,6 @@
                                   <input v-model="form.email" class="input is-large" type="email" placeholder="Your Email" autofocus="">
                               </div>
                           </div>
-
                           <div class="field">
                               <div class="control">
                                   <input v-model="form.password" class="input is-large" type="password" placeholder="Your Password">
@@ -33,7 +32,7 @@
                   </div>
                   <p class="has-text-grey">
                       <router-link to="/register">Sign Up</router-link> &nbsp;·&nbsp;
-                      <a href="../">Forgot Password</a>
+                      <router-link to="/forgotme">Forgot Password</router-link>
                   </p>
               </div>
           </div>
@@ -41,7 +40,6 @@
   </section>
 </div>
 </template>
-
 <script>
 /* eslint-disable */
 export default {
@@ -64,7 +62,6 @@ export default {
   }
 }
 </script>
-
 <style>
 #login {
   font-family: 'Open Sans', serif;
@@ -101,5 +98,4 @@ p {
 p.subtitle {
   padding-top: 1rem;
 }
-
 </style>

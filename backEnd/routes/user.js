@@ -3,6 +3,8 @@ var passport = require('passport');
 var bCrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var models = require('../models');
+var nodemailer = require('nodemailer');
+
 var _user = models.user;
 const SECRET = "s!2r#rcv[eT)";
 
@@ -41,7 +43,7 @@ router.post('/login', (req,res) => {
       res.send("sry.");
     }
     const token = jwt.sign({id:user.id, email:user.email, isVerificated:user.isVerificated}, SECRET, {expiresIn:'1d'});
-    res.cookie("jwt", token, {httpOnly: true, maxAge: 1000 * 60 * 30});
+    res.cookie("jwt", token, {httpOnly: true, maxAge: 1000 * 60 * 60 * 24});
     res.send("done.");
   });
 });
@@ -56,6 +58,31 @@ router.get('/logout', (req, res) => {
   res.send('done.');
 });
 
+router.post('/emailVerfication',passport.authenticate('jwt', { session: false }), (req, res) => {
+  let email = req.body.email;
+  _user.findOne({where:{email:email}}).then(user => {
+    let smtpTransport = nodemailer.createTransport(smtpPool({
+      service: 'Gmail',
+      host: 'localhost',
+      port: '465',
+      tls: {
+        rejectUnauthorize: false
+      },
+      auth: {
+        user:'',
+        pass: ''
+      },
+      maxConnection: 5,
+      maxMessages: 10
+    }));
 
+    let mailOptions = {
+      from: 'noReply <ifmoon.io@gmail.com>',
+      to: email,
+      subject: '헬로서울 임시 비밀번호입니다.',
+      text: '링크를 클릭해주세요.'
+    };
+  })
+});
 
 module.exports = router;
